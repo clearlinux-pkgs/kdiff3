@@ -4,7 +4,7 @@
 #
 Name     : kdiff3
 Version  : 17e52c0d1b257d37f5fa42908d67d7019f9476f8
-Release  : 1
+Release  : 2
 URL      : https://github.com/KDE/kdiff3/archive/17e52c0d1b257d37f5fa42908d67d7019f9476f8.tar.gz
 Source0  : https://github.com/KDE/kdiff3/archive/17e52c0d1b257d37f5fa42908d67d7019f9476f8.tar.gz
 Summary  : No detailed summary available
