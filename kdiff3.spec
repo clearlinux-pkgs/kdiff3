@@ -4,7 +4,7 @@
 #
 Name     : kdiff3
 Version  : 17e52c0d1b257d37f5fa42908d67d7019f9476f8
-Release  : 2
+Release  : 3
 URL      : https://github.com/KDE/kdiff3/archive/17e52c0d1b257d37f5fa42908d67d7019f9476f8.tar.gz
 Source0  : https://github.com/KDE/kdiff3/archive/17e52c0d1b257d37f5fa42908d67d7019f9476f8.tar.gz
 Summary  : No detailed summary available
@@ -17,6 +17,7 @@ Requires: kdiff3-license = %{version}-%{release}
 Requires: kdiff3-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
 
 %description
 KDiff3-Readme
@@ -30,7 +31,6 @@ Summary: bin components for the kdiff3 package.
 Group: Binaries
 Requires: kdiff3-data = %{version}-%{release}
 Requires: kdiff3-license = %{version}-%{release}
-Requires: kdiff3-man = %{version}-%{release}
 
 %description bin
 bin components for the kdiff3 package.
@@ -81,26 +81,33 @@ man components for the kdiff3 package.
 
 %prep
 %setup -q -n kdiff3-17e52c0d1b257d37f5fa42908d67d7019f9476f8
+cd %{_builddir}/kdiff3-17e52c0d1b257d37f5fa42908d67d7019f9476f8
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1547928120
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1588705345
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1547928120
+export SOURCE_DATE_EPOCH=1588705345
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdiff3
-cp COPYING %{buildroot}/usr/share/package-licenses/kdiff3/COPYING
-cp diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/diff_ext_for_kdiff3_LICENSE
-cp windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/windows_installer_COPYING.txt
+cp %{_builddir}/kdiff3-17e52c0d1b257d37f5fa42908d67d7019f9476f8/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
+cp %{_builddir}/kdiff3-17e52c0d1b257d37f5fa42908d67d7019f9476f8/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-17e52c0d1b257d37f5fa42908d67d7019f9476f8/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
+cp %{_builddir}/kdiff3-17e52c0d1b257d37f5fa42908d67d7019f9476f8/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
 pushd clr-build
 %make_install
 popd
@@ -151,9 +158,9 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/kdiff3/COPYING
-/usr/share/package-licenses/kdiff3/diff_ext_for_kdiff3_LICENSE
-/usr/share/package-licenses/kdiff3/windows_installer_COPYING.txt
+/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
+/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
+/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
 
 %files man
 %defattr(0644,root,root,0755)
