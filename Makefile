@@ -1,5 +1,5 @@
 PKG_NAME := kdiff3
-URL = https://github.com/KDE/kdiff3/archive/17e52c0d1b257d37f5fa42908d67d7019f9476f8.tar.gz
+URL = https://download.kde.org/stable/kdiff3/kdiff3-1.8.2.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
