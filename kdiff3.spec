@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xF442B36D614B06BC (reeves.87@gmail.com)
 #
 Name     : kdiff3
-Version  : 1.8.3
-Release  : 5
-URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.8.3.tar.xz
-Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.8.3.tar.xz
-Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.8.3.tar.xz.sig
+Version  : 1.8.4
+Release  : 6
+URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.8.4.tar.xz
+Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.8.4.tar.xz
+Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.8.4.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0
@@ -28,7 +28,7 @@ KDiff3-Readme
 =============
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
-KDiff3-Version: 1.8.3
+KDiff3-Version: 1.8.4
 
 %package bin
 Summary: bin components for the kdiff3 package.
@@ -92,15 +92,15 @@ man components for the kdiff3 package.
 
 
 %prep
-%setup -q -n kdiff3-1.8.3
-cd %{_builddir}/kdiff3-1.8.3
+%setup -q -n kdiff3-1.8.4
+cd %{_builddir}/kdiff3-1.8.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1593057011
+export SOURCE_DATE_EPOCH=1602632124
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -113,13 +113,13 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1593057011
+export SOURCE_DATE_EPOCH=1602632124
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdiff3
-cp %{_builddir}/kdiff3-1.8.3/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
-cp %{_builddir}/kdiff3-1.8.3/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
-cp %{_builddir}/kdiff3-1.8.3/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
-cp %{_builddir}/kdiff3-1.8.3/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-1.8.4/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
+cp %{_builddir}/kdiff3-1.8.4/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-1.8.4/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
+cp %{_builddir}/kdiff3-1.8.4/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
 pushd clr-build
 %make_install
 popd
@@ -154,7 +154,6 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/doc/HTML/ca/kdiff3/index.cache.bz2
 /usr/share/doc/HTML/ca/kdiff3/index.docbook
-/usr/share/doc/HTML/ca/kdiff3/letter_by_letter.png
 /usr/share/doc/HTML/ca/kdiff3/open_dialog.png
 /usr/share/doc/HTML/de/kdiff3/index.cache.bz2
 /usr/share/doc/HTML/de/kdiff3/index.docbook
