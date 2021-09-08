@@ -5,20 +5,21 @@
 # Source0 file verified with key 0xF442B36D614B06BC (reeves.87@gmail.com)
 #
 Name     : kdiff3
-Version  : 1.8.5
-Release  : 7
-URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.8.5.tar.xz
-Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.8.5.tar.xz
-Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.8.5.tar.xz.sig
+Version  : 1.9.3
+Release  : 8
+URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.9.3.tar.xz
+Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.3.tar.xz
+Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.3.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : BSD-2-Clause GPL-2.0
+License  : BSD-2-Clause GPL-2.0 MIT
 Requires: kdiff3-bin = %{version}-%{release}
 Requires: kdiff3-data = %{version}-%{release}
 Requires: kdiff3-lib = %{version}-%{release}
 Requires: kdiff3-license = %{version}-%{release}
 Requires: kdiff3-locales = %{version}-%{release}
 Requires: kdiff3-man = %{version}-%{release}
+BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules-data
@@ -28,7 +29,7 @@ KDiff3-Readme
 =============
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
-KDiff3-Version: 1.8.5
+KDiff3-Version: 1.9.3
 
 %package bin
 Summary: bin components for the kdiff3 package.
@@ -92,15 +93,15 @@ man components for the kdiff3 package.
 
 
 %prep
-%setup -q -n kdiff3-1.8.5
-cd %{_builddir}/kdiff3-1.8.5
+%setup -q -n kdiff3-1.9.3
+cd %{_builddir}/kdiff3-1.9.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1611251001
+export SOURCE_DATE_EPOCH=1631079485
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -113,13 +114,16 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1611251001
+export SOURCE_DATE_EPOCH=1631079485
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdiff3
-cp %{_builddir}/kdiff3-1.8.5/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
-cp %{_builddir}/kdiff3-1.8.5/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
-cp %{_builddir}/kdiff3-1.8.5/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
-cp %{_builddir}/kdiff3-1.8.5/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-1.9.3/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
+cp %{_builddir}/kdiff3-1.9.3/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
+cp %{_builddir}/kdiff3-1.9.3/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/kdiff3-1.9.3/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
+cp %{_builddir}/kdiff3-1.9.3/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-1.9.3/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
+cp %{_builddir}/kdiff3-1.9.3/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
 pushd clr-build
 %make_install
 popd
@@ -145,7 +149,6 @@ popd
 /usr/share/icons/hicolor/48x48/apps/kdiff3.png
 /usr/share/icons/hicolor/64x64/apps/kdiff3.png
 /usr/share/icons/hicolor/scalable/apps/kdiff3.svgz
-/usr/share/kservices5/kdiff3part.desktop
 /usr/share/kxmlgui5/kdiff3/kdiff3_shell.rc
 /usr/share/kxmlgui5/kdiff3part/kdiff3_part.rc
 /usr/share/metainfo/org.kde.kdiff3.appdata.xml
@@ -190,7 +193,10 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
 /usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
+/usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
 /usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+/usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
+/usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files man
 %defattr(0644,root,root,0755)
