@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xF442B36D614B06BC (reeves.87@gmail.com)
 #
 Name     : kdiff3
-Version  : 1.9.5
-Release  : 10
-URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.9.5.tar.xz
-Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.5.tar.xz
-Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.5.tar.xz.sig
+Version  : 1.9.6
+Release  : 11
+URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.9.6.tar.xz
+Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.6.tar.xz
+Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.6.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0 MIT
@@ -93,15 +93,15 @@ man components for the kdiff3 package.
 
 
 %prep
-%setup -q -n kdiff3-1.9.5
-cd %{_builddir}/kdiff3-1.9.5
+%setup -q -n kdiff3-1.9.6
+cd %{_builddir}/kdiff3-1.9.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646715217
+export SOURCE_DATE_EPOCH=1656455786
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -114,16 +114,16 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1646715217
+export SOURCE_DATE_EPOCH=1656455786
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdiff3
-cp %{_builddir}/kdiff3-1.9.5/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
-cp %{_builddir}/kdiff3-1.9.5/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
-cp %{_builddir}/kdiff3-1.9.5/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/kdiff3-1.9.5/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
-cp %{_builddir}/kdiff3-1.9.5/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
-cp %{_builddir}/kdiff3-1.9.5/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
-cp %{_builddir}/kdiff3-1.9.5/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-1.9.6/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
+cp %{_builddir}/kdiff3-1.9.6/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
+cp %{_builddir}/kdiff3-1.9.6/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/kdiff3-1.9.6/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
+cp %{_builddir}/kdiff3-1.9.6/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-1.9.6/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
+cp %{_builddir}/kdiff3-1.9.6/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
 pushd clr-build
 %make_install
 popd
