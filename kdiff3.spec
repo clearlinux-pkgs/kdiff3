@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xF442B36D614B06BC (reeves.87@gmail.com)
 #
 Name     : kdiff3
-Version  : 1.9.6
-Release  : 11
-URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.9.6.tar.xz
-Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.6.tar.xz
-Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.9.6.tar.xz.sig
+Version  : 1.10.0
+Release  : 12
+URL      : https://download.kde.org/stable/kdiff3/kdiff3-1.10.0.tar.xz
+Source0  : https://download.kde.org/stable/kdiff3/kdiff3-1.10.0.tar.xz
+Source1  : https://download.kde.org/stable/kdiff3/kdiff3-1.10.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : BSD-2-Clause GPL-2.0 MIT
+License  : BSD-2-Clause CC0-1.0 GPL-2.0 MIT
 Requires: kdiff3-bin = %{version}-%{release}
 Requires: kdiff3-data = %{version}-%{release}
 Requires: kdiff3-lib = %{version}-%{release}
@@ -23,13 +23,16 @@ BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules-data
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 KDiff3-Readme
 =============
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
-KDiff3-Version: 1.9.5
+KDiff3-Version: 1.10.0
 
 %package bin
 Summary: bin components for the kdiff3 package.
@@ -93,43 +96,42 @@ man components for the kdiff3 package.
 
 
 %prep
-%setup -q -n kdiff3-1.9.6
-cd %{_builddir}/kdiff3-1.9.6
+%setup -q -n kdiff3-1.10.0
+cd %{_builddir}/kdiff3-1.10.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656455786
+export SOURCE_DATE_EPOCH=1673968059
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656455786
+export SOURCE_DATE_EPOCH=1673968059
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kdiff3
-cp %{_builddir}/kdiff3-1.9.6/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
-cp %{_builddir}/kdiff3-1.9.6/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
-cp %{_builddir}/kdiff3-1.9.6/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/kdiff3-1.9.6/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
-cp %{_builddir}/kdiff3-1.9.6/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
-cp %{_builddir}/kdiff3-1.9.6/windows_installer/COPYING.txt %{buildroot}/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
-cp %{_builddir}/kdiff3-1.9.6/windows_installer/DIFF-EXT-LICENSE.txt %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+cp %{_builddir}/kdiff3-%{version}/COPYING %{buildroot}/usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83 || :
+cp %{_builddir}/kdiff3-%{version}/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e || :
+cp %{_builddir}/kdiff3-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kdiff3/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0 || :
+cp %{_builddir}/kdiff3-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb || :
+cp %{_builddir}/kdiff3-%{version}/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3 || :
+cp %{_builddir}/kdiff3-%{version}/diff_ext_for_kdiff3/LICENSE %{buildroot}/usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4 || :
 pushd clr-build
 %make_install
 popd
 %find_lang kdiff3
-%find_lang kdiff3fileitemactionplugin
 %find_lang diff_ext
+%find_lang kdiff3fileitemactionplugin
 
 %files
 %defattr(-,root,root,-)
@@ -149,6 +151,7 @@ popd
 /usr/share/icons/hicolor/48x48/apps/kdiff3.png
 /usr/share/icons/hicolor/64x64/apps/kdiff3.png
 /usr/share/icons/hicolor/scalable/apps/kdiff3.svgz
+/usr/share/kservices5/kdiff3part.desktop
 /usr/share/kxmlgui5/kdiff3/kdiff3_shell.rc
 /usr/share/kxmlgui5/kdiff3part/kdiff3_part.rc
 /usr/share/metainfo/org.kde.kdiff3.appdata.xml
@@ -191,10 +194,10 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/kdiff3/25f89a2de584606893a813a5a457400d4755a5ef
 /usr/share/package-licenses/kdiff3/47c547529aa3a83793060dc46dd05d2eb284de83
 /usr/share/package-licenses/kdiff3/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
 /usr/share/package-licenses/kdiff3/6c284580296aa36e06810ccb61e130fc422eb4d4
+/usr/share/package-licenses/kdiff3/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
 /usr/share/package-licenses/kdiff3/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
 /usr/share/package-licenses/kdiff3/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
@@ -209,6 +212,6 @@ popd
 /usr/share/man/sv/man1/kdiff3.1
 /usr/share/man/uk/man1/kdiff3.1
 
-%files locales -f kdiff3.lang -f kdiff3fileitemactionplugin.lang -f diff_ext.lang
+%files locales -f kdiff3.lang -f diff_ext.lang -f kdiff3fileitemactionplugin.lang
 %defattr(-,root,root,-)
 
